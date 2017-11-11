@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<GridPane fx:controller="sample.JoinController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Text text="Join Page" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Label text="ID : " GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="idField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label text="Password : " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <PasswordField fx:id="passwordField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Label text="PW Check : " GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <PasswordField fx:id="checkPassField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Label text="Age : " GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="ageCombo" promptText="Select Your Age" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Label text="Gender : " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <RadioButton fx:id="manButton" text="Man" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <RadioButton fx:id="womanButton" text="Woman" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <Label text="Email : " GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <TextField fx:id="emailField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+    <Button fx:id="joinActionButton" GridPane.rowIndex="8" GridPane.columnIndex="0" GridPane.columnSpan="2">Join</Button>
+</GridPane>
