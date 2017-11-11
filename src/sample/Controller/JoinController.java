@@ -1,4 +1,4 @@
-package sample;
+package sample.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import sample.Member.MemberDAO;
 import sample.Member.MemberDTO;
+import sample.Util.PasswordHash;
 
 import java.net.URL;
 import java.sql.*;
@@ -43,6 +44,7 @@ public class JoinController implements Initializable {
 
         manButton.setToggleGroup(genderGroup);
         womanButton.setToggleGroup(genderGroup);
+        manButton.isSelected();
 
         joinActionButton.setOnAction(event -> {
             MemberDAO memberDAO = new MemberDAO();
@@ -58,9 +60,18 @@ public class JoinController implements Initializable {
 
                 alert.showAndWait();
 
+            } else if (idField.getText().equals("") || passwordField.getText().equals("") || checkPassField.getText().equals("") ||
+                    ageCombo.getSelectionModel().getSelectedIndex() == 0 || emailField.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Fill All Lists");
+                alert.setContentText("Try Again Please.");
+
+                alert.showAndWait();
+
             } else {
                 memberDTO.setMemberID(idField.getText());
-                memberDTO.setMemberPassword(passwordField.getText());
+                memberDTO.setMemberPassword(new PasswordHash().LockPassword(passwordField.getText()));
                 memberDTO.setMemberAge(Integer.parseInt(ageCombo.getSelectionModel().getSelectedItem().toString()));
                 memberDTO.setMemberGender(genderGroup.getSelectedToggle().toString().split("'")[1].split("'")[0]);
                 memberDTO.setMemberEmail(emailField.getText());
@@ -74,7 +85,7 @@ public class JoinController implements Initializable {
                     alert.setContentText("Thank you.");
 
                     alert.showAndWait();
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
+                    ((Node) (event.getSource())).getScene().getWindow().hide();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Error");

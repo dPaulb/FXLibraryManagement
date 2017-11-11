@@ -42,20 +42,41 @@ public class MemberDAO {
         return -1;
     }
 
-    public int checkRedundantID(String memberID){
+    public int checkRedundantID(String memberID) {
         String SQL = "SELECT * FROM member WHERE memberID = ?";
-        try{
+        try {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, memberID);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return 1;
             }
             return -1;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return -2;
+    }
+
+    public int login(MemberDTO memberDTO) {
+        String SQL = "SELECT * FROM member WHERE memberID = ?";
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, memberDTO.getMemberID());
+
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("memberPassword").equals(memberDTO.getMemberPassword())) {
+                    return 1; // 로그인 성공
+                } else {
+                    return 0; // 비밀번호 오류
+                }
+            }
+            return -1; // 없는 아이디
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -2; // 데이터베이스 에러
     }
 }
